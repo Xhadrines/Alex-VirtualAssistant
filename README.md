@@ -31,5 +31,5 @@ Proiectul are ca scop ușurința accesului la informații importante pentru stud
 * prof. dr. ing. Turcu Cristina Elena - Profesor îndrumător
 
 ## Alte informații
-**Documentație:** [Apasă-mă](Documentatie.pdf)
+**Documentație:** <a href="Documentatie.pdf" target="_blank">Apasă-mă</a>
 
