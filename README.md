@@ -10,6 +10,14 @@ Prin intermediul acestei funcționalitați, studenții pot obține rapid informa
 * Crearea de adeverințe online.
 * Răspunsuri la întrebări frecvente despre taxe, burse și alte informații.
 
+## Cerințe de sistem
+### Cerințe Minime
+* **Placă video:** NVIDIA RTX 3050 Ti cu 4 GB VRAM
+* **Procesor:** AMD Ryzen 7 6800H
+* **Memorie RAM:** 16 GB DDR5
+* **Spațiu de stocare:** ??? MB/GB (SSD obligatoriu, această informație va fi actualizată ulterior)
+* **Sistem de operare:** Windows 10 sau mai recent (posibil si linux, această informație va fi actualizată ulterior)
+
 ## Scop
 Proiectul are ca scop ușurința accesului la informații importante pentru studenți, scurtând astfel timpul petrecut în căutarea acestora.
 
@@ -23,5 +31,5 @@ Proiectul are ca scop ușurința accesului la informații importante pentru stud
 * prof. dr. ing. Turcu Cristina Elena - Profesor îndrumător
 
 ## Alte informații
-**Documentație:** (*de adaugat*)
+**Documentație:** [Apasă-mă](Documentatie.pdf)
 
