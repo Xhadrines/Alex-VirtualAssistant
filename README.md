@@ -4,7 +4,7 @@ Acest proiect reprezintă o nouă funcționalitate pentru site-ul **Facultății
 ## Descriere
 **Alex** este un asistent virtual conceput pentru a ajuta studenții să nu mai facă o vizită la secretariat.
 
-Prin intermediul acestei funcționalitați, studenții pot obține rapid informații precum:
+Prin intermediul acestei funcționalități, studenții pot obține rapid informații precum:
 * Informații despre grupa în care se află.
 * Informații despre orar.
 * Crearea de adeverințe online.
