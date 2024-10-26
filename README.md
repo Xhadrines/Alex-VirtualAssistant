@@ -22,8 +22,15 @@ Prin intermediul acestei funcționalități, studenții pot obține rapid inform
 Proiectul are ca scop ușurința accesului la informații importante pentru studenți, scurtând astfel timpul petrecut în căutarea acestora.
 
 ## Tehnologii
-* **Backend:** *Limbajul de programare **Java** folosind framework-ul **Spring**.*
-* **Frontend:** ***HTML**, **CSS**, **JavaScript**.*
+* **Backend**
+  * **Java:** 21.0.4
+  * **Gradle:** 8.10.2
+  * **Spring Boot:** 3.3.4
+  * **Format pachet:** WAR (Web Application Archive)
+* **Frontend**
+  * **HTML**
+  * **CSS**
+  * **JavaScript**
 * **Database:** ***Oracle SQL** (posibil alta, această informație va fi actualizată ulterior).*
 
 ## Autori
