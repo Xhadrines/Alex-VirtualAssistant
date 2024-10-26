@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication; // Pentru a
  * Aceasta pornește aplicația Spring Boot.
  *
  * @author Șandru Alexandru
- * @version 0.1.0
+ * @version 0.1.1
  * @since 26-10-2024
  */
 @SpringBootApplication // Activează configurarea automată a aplicație.

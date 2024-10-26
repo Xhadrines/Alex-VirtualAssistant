@@ -8,7 +8,7 @@ plugins {
 
 // Setarea grupului și versiunii aplicației
 group = 'ro.usv'
-version = '0.1.0'
+version = '0.1.1'
 
 // Configurarea versiunii de Java
 java {
@@ -32,6 +32,7 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Starter pentru JPA
     implementation 'org.springframework.boot:spring-boot-starter-web' // Starter pentru aplicații web
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // Starter pentru integrarea Thymeleaf, motor de template-uri pentru generarea paginilor HTML
     implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter' // Starter pentru Ollama
     developmentOnly 'org.springframework.boot:spring-boot-devtools' // DevTools pentru dezvoltare
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' // Tomcat ca runtime

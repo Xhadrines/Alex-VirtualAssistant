@@ -14,7 +14,7 @@ import ro.usv.virtual_assistant.AlexSpringApplicationBuilder;
  * aplicației să fie implementată pe un server de aplicații.
  *
  * @author Șandru Alexandru
- * @version 0.1.0
+ * @version 0.1.1
  * @since 26-10-2024
  */
 public class ServletInitializer extends SpringBootServletInitializer {

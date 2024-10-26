@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * se încarcă corect.
  *
  * @author Șandru Alexandru
- * @version 0.1.0
+ * @version 0.1.1
  * @since 26-10-2024
  */
 @SpringBootTest // Indică faptul că este un test care va verifica contextul Spring.
