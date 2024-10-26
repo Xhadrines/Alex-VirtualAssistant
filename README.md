@@ -11,7 +11,7 @@ Prin intermediul acestei funcționalități, studenții pot obține rapid inform
 * Răspunsuri la întrebări frecvente despre taxe, burse și alte informații.
 
 ## Cerințe de sistem
-### Cerințe Minime
+### Cerințe minime
 * **Placă video:** NVIDIA RTX 3050 Ti cu 4 GB VRAM
 * **Procesor:** AMD Ryzen 7 6800H
 * **Memorie RAM:** 16 GB DDR5

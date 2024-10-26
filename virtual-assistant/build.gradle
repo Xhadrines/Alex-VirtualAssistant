@@ -1,0 +1,52 @@
+// Declararea pluginurilor necesare pentru proiect
+plugins {
+    id 'java' // Plugin pentru suport Java
+    id 'war' // Plugin pentru construirea unui fișier WAR
+    id 'org.springframework.boot' version '3.3.5' // Plugin Spring Boot
+    id 'io.spring.dependency-management' version '1.1.6' // Plugin pentru gestionarea dependențelor
+}
+
+// Setarea grupului și versiunii aplicației
+group = 'ro.usv'
+version = '0.1.0'
+
+// Configurarea versiunii de Java
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // Setează versiunea Java la 21
+    }
+}
+
+// Definirea repository-urilor pentru a descărca dependențele
+repositories {
+    mavenCentral() // Repository principal pentru dependențe
+    maven { url 'https://repo.spring.io/milestone' } // Repository pentru versiunile de dezvoltare Spring
+}
+
+// Variabile externe pentru gestionarea versiunilor
+ext {
+    set('springAiVersion', "1.0.0-M3") // Versiunea pentru Spring AI
+}
+
+// Declararea dependențelor necesare pentru proiect
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Starter pentru JPA
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Starter pentru aplicații web
+    implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter' // Starter pentru Ollama
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' // DevTools pentru dezvoltare
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' // Tomcat ca runtime
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // Starter pentru testare
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit platform pentru rularea testelor
+}
+
+// Gestionarea dependențelor cu BOM (Bill of Materials)
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}" // Importă BOM pentru gestionarea versiunilor
+    }
+}
+
+// Configurarea sarcinii de testare
+tasks.named('test') {
+    useJUnitPlatform() // Folosește platforma JUnit pentru testare
+}
