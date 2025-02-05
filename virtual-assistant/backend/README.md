@@ -1,6 +1,6 @@
 # Backend
 
-Aceasta este **partea de backend** a aplicației.
+Aceasta este **partea de backend** a aplicației, construită folosind framework-ul **Django**.
 
 ## Cerințe
 

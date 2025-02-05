@@ -15,17 +15,20 @@ Prin intermediul acestei funcționalități, studenții pot obține rapid inform
 * **Placă video:** NVIDIA RTX 3050 Ti cu 4 GB VRAM
 * **Procesor:** AMD Ryzen 7 6800H
 * **Memorie RAM:** 16 GB DDR5
-* **Spațiu de stocare:** ??? MB/GB (SSD obligatoriu, această informație va fi actualizată ulterior)
-* **Sistem de operare:** Windows 10 sau mai recent (posibil si linux, această informație va fi actualizată ulterior)
+* **Sistem de operare:** Windows 10 sau mai recent
+
+### Cerințe recomandate
+* **Placă video:** NVIDIA RTX 4070 cu 8 GB VRAM
+* **Procesor:** AMD Ryzen 7 7745HX
+* **Memorie RAM:** 32 GB DDR5
+* **Sistem de operare:** Windows 10 sau mai recent
 
 ## Scop
 Proiectul are ca scop ușurința accesului la informații importante pentru studenți, scurtând astfel timpul petrecut în căutarea acestora.
 
 ## Tehnologii
-* **Backend**
-  * **Python:** 3.13.2 sau mai mare
-* **Frontend**
-  * ** **
+* **Backend**: Django
+* **Frontend**: React + Vite
 * **Database:** ***Oracle SQL** (posibil alta, această informație va fi actualizată ulterior).*
 
 ## Autori

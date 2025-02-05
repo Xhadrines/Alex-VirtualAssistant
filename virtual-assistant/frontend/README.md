@@ -1,6 +1,6 @@
 # Frontend
 
-Aceasta este **partea de frontend** a aplicației.
+Aceasta este **partea de frontend** a aplicației, construită folosind framework-ul **React + Vite**.
 
 ## Cerințe
 
