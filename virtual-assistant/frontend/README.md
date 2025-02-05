@@ -1,8 +1,28 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aceasta este **partea de frontend** a aplicației.
 
-Currently, two official plugins are available:
+## Cerințe
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Pentru a rula aplicația, trebuie să ai instalat:
+
+* **Node.js** (v22.13.1 sau o versiune mai mare)
+* **npm** (v10.9.2 sau o versiune mai mare)
+
+## Instalare
+
+1. Asigură-te că te afli în directorul `frontend`
+
+2. Instalează dependențele folosind comanda:
+
+```bash
+npm install
+```
+
+3. Rulează proiectul folosind comanda:
+
+```bash
+npm run dev
+```
+
+4. Proiectul rulează pe `http://localhost:5173/`. *(Există posibilitatea să fie un alt link.)*
