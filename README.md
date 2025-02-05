@@ -23,14 +23,9 @@ Proiectul are ca scop ușurința accesului la informații importante pentru stud
 
 ## Tehnologii
 * **Backend**
-  * **Java:** 21.0.4
-  * **Gradle:** 8.10.2
-  * **Spring Boot:** 3.3.4
-  * **Format pachet:** WAR (Web Application Archive)
+  * **Python:** 3.13.2 sau mai mare
 * **Frontend**
-  * **HTML**
-  * **CSS**
-  * **JavaScript**
+  * ** **
 * **Database:** ***Oracle SQL** (posibil alta, această informație va fi actualizată ulterior).*
 
 ## Autori
