@@ -31,6 +31,20 @@ Proiectul are ca scop ușurința accesului la informații importante pentru stud
 * **Frontend**: React + Vite
 * **Database:** ***Oracle SQL** (posibil alta, această informație va fi actualizată ulterior).*
 
+## Instalare
+Urmează pașii de mai jos pentru a instala și configura proiectul.
+
+1. Clonează repository-ul folosind comanda:
+```bash
+git clone https://github.com/Xhadrines/Alex-VirtualAssistant.git
+```
+
+2. Pentru a configura backend-ul, accesează [virtual-assistant/backend/README.md](virtual-assistant/backend/README.md), unde vei găsi informațiile necesare.
+
+3. Pentru a configura frontend-ul, accesează [virtual-assistant/frontend/README.md](virtual-assistant/frontend/README.md), unde vei găsi informațiile necesare.
+
+4. După ce ai pornit backend-ul și frontend-ul, deschide aplicația în browser accesând linkul generat de frontend `http://localhost:5173/`. *(Există posibilitatea să fie un alt link.)*
+
 ## Autori
 * Șandru Alexandru - Autor principal
 * prof. dr. ing. Turcu Cristina Elena - Profesor îndrumător
