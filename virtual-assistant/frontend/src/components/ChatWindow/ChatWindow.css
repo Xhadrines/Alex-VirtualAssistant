@@ -1,0 +1,159 @@
+/* Stil pentru butonul care deschide chat-ul */
+.chat-toggle-btn {
+    position: fixed; /* Pozitioneaza butonul intr-o locatie fixa pe ecran */
+    bottom: 20px; /* Pozitionare de la partea de jos */
+    right: 20px; /* Pozitionare de la partea dreapta */
+    padding: 10px 20px; /* Spatiu in jurul textului */
+    background-color: #444; /* Fundal gri inchis */
+    color: #fff; /* Text alb */
+    border: none; /* Fara bordura */
+    border-radius: 50%; /* Colturi rotunjite pentru forma circulara */
+    cursor: pointer; /* Schimba cursorul la mana cand este asupra butonului */
+    font-size: 16px; /* Dimensiunea textului */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adauga o umbra subtila pentru efect vizual */
+}
+
+/* Stil pentru containerul ferestrei de chat */
+.chat-container {
+    position: fixed; /* Pozitionare fixa pe ecran */
+    bottom: 20px; /* Pozitioneaza de la partea de jos */
+    right: 20px; /* Pozitioneaza de la partea dreapta */
+    width: 350px; /* Latimea containerului */
+    height: 450px; /* Inaltimea containerului */
+    background-color: #2c2c2c; /* Fundal inchis pentru fereastra */
+    border-radius: 8px; /* Colturi rotunjite */
+    border: 1px solid #444; /* Bordura subtire, gri inchis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Adauga umbra pentru adancire */
+    display: flex; /* Foloseste flexbox pentru alinierea elementelor */
+    flex-direction: column; /* Aliniaza elementele pe verticala */
+    transform: translateY(100%); /* Ascunde fereastra in afacerea ecranului */
+    transition: transform 0.3s ease-out; /* Tranzitie lina pentru deschiderea ferestrei */
+}
+
+/* Stil pentru fereastra de chat deschisa */
+.chat-container.open {
+    transform: translateY(0); /* Muta fereastra la pozitia normala atunci cand este deschisa */
+}
+
+/* Stil pentru header-ul chat-ului */
+.chat-header {
+    display: flex; /* Foloseste flexbox pentru a organiza elementele */
+    justify-content: space-between; /* Distribuie elementele in colturi opuse */
+    background-color: #333; /* Fundal gri inchis */
+    color: #fff; /* Text alb */
+    padding: 10px; /* Spatiu intern pentru header */
+    border-top-left-radius: 8px; /* Colturi rotunjite pentru partea de sus stanga */
+    border-top-right-radius: 8px; /* Colturi rotunjite pentru partea de sus dreapta */
+}
+
+/* Stiluri pentru butoanele de minimizare si inchidere */
+.chat-header .chat-minimize,
+.chat-header .chat-close {
+    background: none; /* Fara fundal */
+    border: none; /* Fara bordura */
+    color: #fff; /* Text alb */
+    font-size: 18px; /* Dimensiunea textului */
+    cursor: pointer; /* Cursorul devine mana cand treci cu mouse-ul peste ele */
+}
+
+/* Stil pentru titlul header-ului */
+.chat-header .chat-title {
+    font-weight: bold; /* Face textul bold */
+}
+
+/* Stil pentru zona de mesaje din chat */
+.chat-messages {
+    flex: 1; /* Ocupa tot spatiul disponibil in container */
+    padding: 10px; /* Spatiu intern */
+    overflow-y: scroll; /* Permite derularea verticala daca sunt prea multe mesaje */
+    background-color: #1e1e1e; /* Fundal inchis pentru zona de mesaje */
+    color: #ccc; /* Text gri deschis pentru mesajele din chat */
+}
+
+/* Stil pentru un mesaj individual din chat */
+.chat-message {
+    padding: 10px; /* Spatiu intern pentru fiecare mesaj */
+    background-color: #444; /* Fundal gri inchis pentru mesaje */
+    margin: 5px 0; /* Margine intre mesaje */
+    border-radius: 5px; /* Colturi rotunjite pentru mesaje */
+    color: #fff; /* Text alb */
+}
+
+/* Stilizare generala pentru scrollbar */
+.chat-messages::-webkit-scrollbar {
+    width: 8px; /* Latimea scrollbar-ului */
+}
+
+/* Stilizare pentru track-ul scrollbar-ului */
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Fundalul track-ului scrollbar-ului */
+    border-radius: 10px; /* Colturi rotunjite ale track-ului */
+}
+
+/* Stilizare pentru thumb-ul scrollbar-ului */
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #888; /* Culoarea butonului de derulare */
+    border-radius: 10px; /* Colturi rotunjite ale butonului */
+    transition: background 0.3s ease; /* Tranzitie pentru efectul de hover */
+}
+
+/* Stil pentru hover-ul pe thumb-ul scrollbar-ului */
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Culoare mai inchisa la hover */
+}
+
+/* Stil pentru footer-ul chat-ului */
+.chat-footer {
+    display: flex; /* Flexbox pentru alinierea elementelor */
+    padding: 10px; /* Spatiu intern */
+    background-color: #333; /* Fundal inchis pentru footer */
+    border-top: 1px solid #444; /* Bordura subtila la partea superioara */
+    justify-content: space-between; /* Distribuie elementele pe orizontala */
+}
+
+/* Stil pentru input-ul de mesaj din footer */
+.chat-footer input {
+    flex: 1; /* Ocupa tot spatiul disponibil */
+    padding: 10px; /* Spatiu intern */
+    border: 1px solid #444; /* Bordura gri inchis */
+    border-radius: 4px; /* Colturi rotunjite */
+    margin-right: 10px; /* Spatiu intre input si buton */
+    background-color: #555; /* Fundal gri inchis */
+    color: #fff; /* Text alb */
+}
+
+/* Stil pentru placeholder-ul input-ului */
+.chat-footer input::placeholder {
+    color: #bbb; /* Text gri deschis pentru placeholder */
+}
+
+/* Stil pentru butonul de trimitere al mesajului */
+.chat-footer button {
+    padding: 10px; /* Spatiu intern */
+    background-color: #666; /* Fundal gri inchis */
+    color: #fff; /* Text alb */
+    border: none; /* Fara bordura */
+    border-radius: 4px; /* Colturi rotunjite */
+    cursor: pointer; /* Cursorul devine mana la hover */
+}
+
+/* Stil pentru butonul de trimitere la hover */
+.chat-footer button:hover {
+    background-color: #777; /* Gri mai deschis la hover */
+}
+
+/* Stil pentru mesajul de loading */
+.loading-message {
+    font-size: 14px; /* Dimensiunea textului */
+    color: #aaa; /* Culoare gri deschis */
+    text-align: center; /* Aliniaza textul la centru */
+    padding: 10px; /* Spatiu intern */
+}
+
+/* Stil pentru mesajul de eroare */
+.error-message {
+    font-size: 14px; /* Dimensiunea textului */
+    color: red; /* Culoare rosie pentru mesajele de eroare */
+    text-align: center; /* Aliniaza textul la centru */
+    padding: 10px; /* Spatiu intern */
+}

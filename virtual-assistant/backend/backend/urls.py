@@ -14,9 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
+from django.contrib import admin  # Importa modulul admin pentru a accesa zona de administrare Django
+from django.urls import path, include  # Importa functiile path si include pentru a defini rutele URL si a include alte fisiere de configurare URL
+from api.views import home  # Importa functia home din fisierul de views al aplicatiei 'api'
 
+# Lista principala de rute URL ale aplicatiei
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  # Ruta pentru interfata de administrare Django
+    path('', home, name='home'),  # Ruta pentru pagina principala, care va utiliza functia home din views
+    path('api/', include('api.urls')),  # Include rutele definite in fisierul 'api.urls', pentru a organiza rutele API-ului
 ]

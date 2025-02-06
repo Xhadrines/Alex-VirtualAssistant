@@ -1,5 +1,5 @@
 # Backend
-Aceasta este **partea de backend** a aplicației, construită folosind framework-ul **Django**.
+Aceasta este **partea de backend** a aplicației, construită folosind framework-ul **Django + Django REST framework**.
 
 ## Cerințe
 Pentru a rula aplicația, trebuie să ai instalat:
@@ -24,9 +24,26 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-5. Rulează proiectul folosind comanda:
+5. Crează migrațiile folosind comanda:
+```bash
+python manage.py makemigrations
+```
+
+6. Aplică migrațiile folosind comanda:
+```bash
+python manage.py migrate
+```
+
+7. Instalează Ollama mergând pe [site-ul oficial Ollama](https://ollama.com/).
+
+8. Instalează modelul Llama 3.1 folosind comanda:
+```bash
+ollama pull llama3.1
+```
+
+9. Rulează proiectul folosind comanda:
 ```bash
 python manage.py runserver
 ```
 
-6. Proiectul rulează pe `http://127.0.0.1:8000/`. *(Există posibilitatea să fie un alt link.)*
+10. Proiectul rulează pe `http://127.0.0.1:8000/`. *(Există posibilitatea să fie un alt link.)*
