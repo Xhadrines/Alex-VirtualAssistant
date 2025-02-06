@@ -1,0 +1,40 @@
+# === Backend ===
+venv/                   # Folderul virtual environment
+__pycache__/            # Fisiere Python cache
+*.pyc                   # Fisiere Python compilate
+*.pyo                   # Fisiere Python optimize
+*.pyd                   # Fisiere Python pentru extensii
+db.sqlite3              # Baza de date SQLite
+
+# === Frontend ===
+node_modules/           # Dependentele Node.js
+build/                  # Folderul generat dupa build
+npm-debug.log*          # Loguri pentru npm
+yarn-debug.log*         # Loguri pentru yarn
+yarn-error.log*         # Loguri de eroare pentru yarn
+pnpm-debug.log*         # Loguri pentru pnpm
+lerna-debug.log*        # Loguri pentru lerna
+*.cache                 # Cache generat
+
+# === Log files ===
+logs                    # Fisiere log
+*.log                   # Fisiere log
+
+# === Tooling/Build ===
+dist                    # Directorul de build
+dist-ssr                # Build-ul pentru server-side rendering
+*.local                 # Fisiere locale (de configurare)
+*.suo                   # Fisiere generate de Visual Studio
+*.ntvs*                 # Fisiere generate de Visual Studio Tools for Node.js
+*.njsproj               # Fisiere de proiect Node.js
+*.sln                   # Fisierele solutiei Visual Studio
+*.sw?                   # Fisiere temporare Vim
+
+# === General ===
+.env                    # Fisiere sensibile
+.DS_Store               # Fisierele metadata pentru macOS
+Thumbs.db               # Fisierele metadata pentru Windows
+.idea/                  # Setari JetBrains
+.vscode/                # Setari Visual Studio Code
+*.swp                   # Fisiere temporare Vim
+*.swo                   # Fisiere temporare Vim
