@@ -29,7 +29,7 @@ Proiectul are ca scop ușurința accesului la informații importante pentru stud
 ## Tehnologii
 * **Backend**: Django
 * **Frontend**: React + Vite
-* **Database:** ***Oracle SQL** (posibil alta, această informație va fi actualizată ulterior).*
+* **Database:** SQLite
 
 ## Instalare
 Urmează pașii de mai jos pentru a instala și configura proiectul.
@@ -43,7 +43,7 @@ git clone https://github.com/Xhadrines/Alex-VirtualAssistant.git
 
 3. Pentru a configura frontend-ul, accesează [virtual-assistant/frontend/README.md](virtual-assistant/frontend/README.md), unde vei găsi informațiile necesare.
 
-4. După ce ai pornit backend-ul și frontend-ul, deschide aplicația în browser accesând linkul generat de frontend `http://localhost:5173/`. *(Există posibilitatea să fie un alt link.)*
+4. După ce ai pornit backend-ul și frontend-ul, deschide aplicația în browser accesând linkul generat de frontend `http://127.0.0.1:2002/`.
 
 ## Autori
 * Șandru Alexandru - Autor principal
