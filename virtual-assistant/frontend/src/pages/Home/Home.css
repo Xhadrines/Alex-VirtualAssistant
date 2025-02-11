@@ -1,7 +1,7 @@
 /* Stil pentru containerul principal al paginii Home */
 .home-container {
-    width: 100vw; /* Latimea containerului este setata la 100% din latimea vizibila a ferestrei (viewport) */
-    height: 100vh; /* Inaltimea containerului este setata la 100% din inaltimea vizibila a ferestrei (viewport) */
-    display: flex; /* Foloseste flexbox pentru a organiza elementele interne ale containerului */
-    overflow: hidden; /* Ascunde orice continut care depaseste dimensiunile containerului */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
 }

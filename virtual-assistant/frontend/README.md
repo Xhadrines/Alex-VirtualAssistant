@@ -9,14 +9,20 @@ Pentru a rula aplicația, trebuie să ai instalat:
 ## Instalare
 1. Asigură-te că te afli în directorul `frontend`
 
-2. Instalează dependențele folosind comanda:
+2. Creează un fișier `.env` și adaugă următoarea linie:
+```bash
+VITE_CHAT_API=http://<IP_BACKEND>:<PORT_BACKEND>/api/chat/
+```
+*Note: Înlocuiește `<IP_BACKEND>` și `<PORT_BACKEND>` cu valorile corespunzătoare pe care le obții de la backend.*
+
+3. Instalează dependențele folosind comanda:
 ```bash
 npm install
 ```
 
-3. Rulează proiectul folosind comanda:
+4. Rulează proiectul folosind comanda:
 ```bash
 npm run dev
 ```
 
-4. Proiectul rulează pe `http://localhost:5173/`. *(Există posibilitatea să fie un alt link.)*
+5. Proiectul rulează pe `http://127.0.0.1:2002/`.

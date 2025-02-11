@@ -46,4 +46,4 @@ ollama pull llama3.1
 python manage.py runserver
 ```
 
-10. Proiectul rulează pe `http://127.0.0.1:8000/`. *(Există posibilitatea să fie un alt link.)*
+10.  Proiectul rulează pe `http://127.0.0.1:2307/`.

@@ -1,0 +1,171 @@
+/* Resetare stiluri implicite pentru a asigura consistenta intre browsere */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Container principal al paginii de chat */
+  .chatpage-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  /* Bara superioara cu titlu si butoane */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  /* Stilizare pentru butoanele din header */
+  .back-btn,
+  .settings-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Efect de hover pe butoane */
+  .back-btn:hover,
+  .settings-btn:hover {
+    color: #ccc;
+    opacity: 0.7;
+  }
+  
+  /* Titlul paginii */
+  h1 {
+    font-size: 20px;
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  /* Fereastra de chat unde sunt afisate mesajele */
+  .chat-window {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    padding: 70px 15px 10px 15px;
+    overflow-y: auto;
+    width: 100%;
+    height: calc(100vh - 80px);
+  }
+  
+  /* Container pentru mesaje */
+  .message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  /* Stilizare mesaj generic */
+  .message {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  /* Stilizare mesaj trimis de utilizator */
+  .user-message {
+    background-color: #444;
+    align-self: flex-end;
+    color: #ccc;
+  }
+  
+  /* Stilizare mesaj primit de la bot */
+  .bot-message {
+    background-color: #333;
+    align-self: flex-start;
+    color: white;
+  }
+  
+  /* Zona de introducere a mesajului */
+  .input-area {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 5;
+  }
+  
+  /* Camp de input pentru mesaj */
+  .message-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    background-color: #444;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  /* Placeholder pentru input */
+  .message-input::placeholder {
+    color: #bbb;
+  }
+  
+  /* Buton de trimitere a mesajului */
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Stilizare iconita buton trimitere */
+  .send-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  /* Responsivitate pentru tablete */
+  @media (max-width: 768px) {
+    .message-input {
+      font-size: 12px;
+    }
+  }
+  
+  /* Responsivitate pentru telefoane mobile */
+  @media (max-width: 480px) {
+    .message-container {
+      padding: 5px;
+    }
+    .send-btn {
+      padding: 8px 12px;
+    }
+    .message-input {
+      font-size: 12px;
+    }
+  }
+  
+  /* Stilizare iconite butoane */
+  .button-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  

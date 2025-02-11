@@ -1,8 +1,8 @@
 /* Stil pentru containerul care tine iframe-ul */
 .iframe-container {
-    width: 100vw; /* Latimea containerului va ocupa intreaga latime a ferestrei browserului (100% din latimea vizibila a ferestrei) */
-    height: 100vh; /* Inaltimea containerului va ocupa intreaga inaltime a ferestrei browserului (100% din inaltimea vizibila a ferestrei) */
-    border: none; /* Fara bordura, pentru a elimina orice margine in jurul iframe-ului */
-    display: block; /* Seteaza elementul ca bloc, adica va ocupa intreaga latime disponibila si va incepe pe o linie noua */
-    overflow: hidden; /* Ascunde orice continut care depaseste dimensiunile containerului (nu va aparea scrollbar) */
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    display: block;
+    overflow: hidden;
 }

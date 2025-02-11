@@ -1,10 +1,8 @@
 /* Seteaza latimea si inaltimea la 100% din dimensiunea vizualizarii pentru html, body si root */
 html, body, #root {
-    width: 100vw; /* Latimea este setata la 100% din latimea vizualizarii */
-    height: 100vh; /* Inaltimea este setata la 100% din inaltimea vizualizarii */
-    
-    margin: 0; /* Elimina orice margine implicita a elementelor */
-    padding: 0; /* Elimina orice padding implicit al elementelor */
-    
-    overflow: hidden; /* Ascunde orice continut care depaseste dimensiunile ecranului */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }

@@ -1,138 +1,149 @@
-import React, { useState, useEffect, useRef } from "react"; // Importam hook-urile React necesare
-import axios from "axios"; // Importam axios pentru a face cereri HTTP catre server
-import "./ChatWindow.css"; // Importam fisierul CSS pentru stilizarea componentelor
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./ChatWindow.css";
 
-// Componenta principala ChatWindow
+// URL-ul API-ului
+const API_URL = import.meta.env.VITE_CHAT_API;
+
 const ChatWindow = () => {
-  // State-urile pentru gestionarea diferitelor aspecte ale chat-ului
-  const [isOpen, setIsOpen] = useState(false); // Controlam daca fereastra de chat este deschisa sau nu
-  const [message, setMessage] = useState(""); // Mesajul curent pe care utilizatorul il scrie
-  const [chatMessages, setChatMessages] = useState([]); // Listeaza toate mesajele de chat
-  const [loading, setLoading] = useState(false); // Starea de incarcare (pentru a arata un mesaj de "se genereaza raspunsul")
-  const [error, setError] = useState(null); // Mesajul de eroare, daca apare vreo problema
-  const [welcomeSent, setWelcomeSent] = useState(false); // Verifica daca mesajul de bun venit a fost trimis deja
-  const messagesEndRef = useRef(null); // Folosit pentru a face scroll automat la ultimul mesaj
+  // Starile componentelor pentru gestionarea deschiderii chat-ului, mesajelor, etc.
+  const [isOpen, setIsOpen] = useState(false); // Chat-ul este deschis sau nu
+  const [message, setMessage] = useState(""); // Mesajul introdus de utilizator
+  const [chatMessages, setChatMessages] = useState([]); // Lista mesajelor
+  const [loading, setLoading] = useState(false); // Starea de incarcare
+  const [error, setError] = useState(null); // Erori, daca exista
+  const [welcomeSent, setWelcomeSent] = useState(false); // Verifica daca mesajul de bun venit a fost trimis
+  const messagesEndRef = useRef(null); // Referinta pentru a derula la ultimul mesaj
+  const navigate = useNavigate(); // Pentru navigarea intre pagini
 
-  // Functia care deschide sau inchide chat-ul
+  // Functia care deschide si inchide chat-ul, si trimite mesajul de bun venit
   const toggleChat = async () => {
-    setIsOpen(!isOpen); // Schimbam starea de deschidere a chat-ului
+    setIsOpen(!isOpen); // Schimba starea chat-ului (deschis/inchis)
 
-    // Daca chat-ul nu este deschis si mesajul de bun venit nu a fost trimis
     if (!isOpen && !welcomeSent) {
-      setLoading(true); // Setam starea de incarcare la true
-
+      setLoading(true); // Activeaza incarcarea pentru mesajul de bun venit
       try {
-        // Facem o cerere HTTP catre backend pentru a trimite mesajul de bun venit
-        const response = await axios.post("http://127.0.0.1:8000/api/chat/", { message: "Salut, sunt asistentul tau virtual!" });
+        // Trimite cererea pentru a obtine mesajul de bun venit
+        const response = await axios.post(`${API_URL}`, {
+          message:
+            "Generaza un mesaj scurt (maxim 50 de cuvinte) pentru student/viitor student/utilizator, dupa urmatorul template: mesajul de bun venit, cum te cheama, din ce facultate faci parte, si cu ce il poti ajuta.",
+        });
 
-        // Daca raspunsul contine un mesaj valid, il adaugam la chat
-        if (response.data && response.data.answer) {
-          setChatMessages([{ sender: "bot", text: response.data.answer }]); // Adaugam mesajul botului
-          setWelcomeSent(true); // Marcam mesajul de bun venit ca trimis
+        if (response.data?.answer) {
+          setChatMessages([{ sender: "bot", text: response.data.answer }]); // Adauga mesajul de bun venit
+          setWelcomeSent(true); // Marcheaza ca mesajul de bun venit a fost trimis
         } else {
-          setError("Raspuns invalid de la server. Te rog incearca din nou."); // Setam eroarea daca raspunsul nu este valid
+          setError("Raspuns invalid de la server. Te rog incearca din nou."); // Mesaj de eroare daca nu exista raspuns
         }
-      } catch (error) {
-        setError("Ceva a mers prost. Te rog incearca din nou."); // Setam eroarea in cazul unui esec al cererii
+      } catch {
+        setError("Ceva a mers prost. Te rog incearca din nou."); // Mesaj de eroare la esecul cererii
       } finally {
-        setLoading(false); // Oprim starea de incarcare
+        setLoading(false); // Inchide starea de incarcare
       }
     }
   };
 
-  // Functia care trimite un mesaj
+  // Functia care trimite mesajul introdus de utilizator
   const sendMessage = async () => {
-    // Daca mesajul este gol, nu facem nimic
-    if (!message.trim()) return;
+    if (!message.trim()) return; // Nu trimite mesaje goale
 
-    // Adaugam mesajul utilizatorului in lista de mesaje
-    setChatMessages([...chatMessages, { sender: "user", text: message }]);
-    setLoading(true); // Setam starea de incarcare
-    setMessage(""); // Resetam campul de mesaj
+    setChatMessages([...chatMessages, { sender: "user", text: message }]); // Adauga mesajul utilizatorului
+    setLoading(true); // Activeaza incarcarea
+    setMessage(""); // Reseteaza campul de input
 
     try {
-      // Facem o cerere HTTP catre backend pentru a trimite mesajul utilizatorului
-      const response = await axios.post("http://127.0.0.1:8000/api/chat/", { message });
+      const response = await axios.post(`${API_URL}`, { message }); // Trimite mesajul la API
 
-      // Daca raspunsul contine un mesaj valid, il adaugam la chat
-      if (response.data && response.data.answer) {
+      if (response.data?.answer) {
+        // Adauga raspunsul bot-ului la mesaje
         setChatMessages((prevMessages) => [
-          ...prevMessages, // Adaugam mesajele anterioare
-          { sender: "bot", text: response.data.answer }, // Adaugam raspunsul botului
+          ...prevMessages,
+          { sender: "bot", text: response.data.answer },
         ]);
       } else {
-        setError("Raspuns invalid de la server. Te rog incearca din nou."); // Setam eroarea daca raspunsul nu este valid
+        setError("Raspuns invalid de la server. Te rog incearca din nou."); // Mesaj de eroare in caz de raspuns invalid
       }
-    } catch (error) {
-      setError("Ceva a mers prost. Te rog incearca din nou."); // Setam eroarea in cazul unui esec al cererii
+    } catch {
+      setError("Ceva a mers prost. Te rog incearca din nou."); // Mesaj de eroare in caz de esec
     } finally {
-      setLoading(false); // Oprim starea de incarcare
+      setLoading(false); // Inchide incarcarea
     }
   };
 
-  // Functia care asculta apasarea tastei Enter pentru trimiterea unui mesaj
+  // Functie pentru a trimite mesajul cand se apasa tasta Enter
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Prevenim comportamentul default al tastei Enter (de a trimite formularul)
-      sendMessage(); // Trimitem mesajul
+      e.preventDefault(); // Previne trimiterea formularului
+      sendMessage(); // Trimite mesajul
     }
   };
 
-  // Folosim useEffect pentru a face scroll automat la ultimul mesaj
+  // Efect pentru a derula la ultimul mesaj din chat
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); // Facem scroll automat la ultimul mesaj
-  }, [chatMessages]); // Aceasta actiune se va executa ori de cate ori chatMessages se modifica
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]); // Se executa de fiecare data cand lista de mesaje se modifica
+
+  // Functie pentru a naviga spre o alta pagina (ex: chat complet)
+  const navigateToChat = () => {
+    navigate("/chat");
+  };
 
   return (
     <div>
-      {/* Daca chat-ul nu este deschis, afisam un buton pentru a-l deschide */}
+      {/* Butonul de deschidere a chat-ului */}
       {!isOpen && (
         <button className="chat-toggle-btn" onClick={toggleChat}>
           Alex - Asistent Virtual
         </button>
       )}
 
-      {/* Daca chat-ul este deschis, afisam fereastra de chat */}
+      {/* Chat-ul deschis */}
       {isOpen && (
         <div className={`chat-container ${isOpen ? "open" : ""}`}>
           <div className="chat-header">
+            {/* Butonul pentru deschiderea unui chat mare */}
+            <button className="chat-open" onClick={navigateToChat}>
+              <img src="/new.png" alt="Deschide chat-ul mare" />
+            </button>
+            {/* Titlul chat-ului */}
             <span className="chat-title">Alex - Asistent Virtual</span>
+            {/* Butonul pentru inchiderea chat-ului */}
             <button className="chat-close" onClick={toggleChat}>
-              - {/* Butonul de inchidere a chat-ului */}
+              <img src="/close.png" alt="Inchide chat-ul" />
             </button>
           </div>
           <div className="chat-messages">
-            {/* Afisam toate mesajele din chat */}
+            {/* Mesajele din chat */}
             {chatMessages.map((msg, index) => (
-              <div key={index} className={`chat-message ${msg.sender === "bot" ? "bot" : "user"}`}>
+              <div
+                key={index}
+                className={`chat-message ${msg.sender === "bot" ? "bot" : "user"}`}
+              >
                 {msg.text}
               </div>
             ))}
-            {/* Afisam mesajul de incarcare daca este activ */}
+            {/* Mesajul de incarcare */}
             {loading && <div className="loading-message">Se genereaza raspunsul...</div>}
-            {/* Afisam mesajul de eroare, daca este cazul */}
+            {/* Mesajul de eroare */}
             {error && <div className="error-message">{error}</div>}
-
-            <div ref={messagesEndRef} /> {/* Referinta pentru a face scroll automat la ultimul mesaj */}
+            {/* Referinta pentru derularea automata */}
+            <div ref={messagesEndRef} />
           </div>
           <div className="chat-footer">
-            {/* Campul de input pentru a scrie mesajul */}
+            {/* Campul de input pentru mesaje */}
             <input
               type="text"
               placeholder="Scrie un mesaj..."
               className="chat-input"
               value={message}
-              onChange={(e) => setMessage(e.target.value)} // Actualizam starea cu mesajul utilizatorului
-              onKeyDown={handleKeyDown} // Ascultam pentru apasarea tastei Enter
-              disabled={loading} // Dezactivam input-ul in timpul incarcarii
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyDown}
+              disabled={loading} // Dezactiveaza input-ul in timpul incarcarii
             />
-            {/* Butonul pentru trimiterea mesajului */}
-            <button
-              className="chat-send-btn"
-              onClick={sendMessage} // Trimitem mesajul
-              disabled={loading} // Dezactivam butonul in timpul incarcarii
-            >
-              Send
+            {/* Butonul de trimitere a mesajului */}
+            <button className="chat-send-btn" onClick={sendMessage} disabled={loading}>
+              <img src="/send.png" alt="Trimite mesajul" />
             </button>
           </div>
         </div>
@@ -141,4 +152,4 @@ const ChatWindow = () => {
   );
 };
 
-export default ChatWindow; // Exportam componenta pentru a o putea folosi in alte parti ale aplicatiei
+export default ChatWindow;

@@ -1,11 +1,20 @@
-// Importa componenta Home din locatia specificata
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "../pages/Home/Home";
+import ChatPage from "../pages/ChatPage/ChatPage";
 
-// Componenta principala App
+// Componenta principala a aplicatiei
 function App() {
-  // Returneaza componenta Home
-  return <Home />;
+  return (
+    <Router>
+      <Routes>
+        {/* Ruta pentru pagina principala (Home) */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Ruta pentru pagina de chat */}
+        <Route path="/chat" element={<ChatPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
-// Exporta componenta App pentru a putea fi folosita in alte parti ale aplicatiei
 export default App;
