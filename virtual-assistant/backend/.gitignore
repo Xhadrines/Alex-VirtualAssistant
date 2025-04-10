@@ -1,9 +1,11 @@
 # Backend
+.venv/*
 venv/*
 __pycache__/*
 *.pyc
 *.pyo
 *.pyd
+migrations/*
 db.sqlite3
 
 # Frontend
