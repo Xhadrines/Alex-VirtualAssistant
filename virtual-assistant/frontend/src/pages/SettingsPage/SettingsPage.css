@@ -1,0 +1,203 @@
+/* -----------------------------------------------
+   Resetare stiluri implicite
+----------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* -----------------------------------------------
+   Container principal al paginii de setari
+----------------------------------------------- */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    color: white;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+/* -----------------------------------------------
+   Header fix cu buton de intoarcere
+----------------------------------------------- */
+.settings-container .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    z-index: 10;
+    border-bottom: 1px solid #444;
+}
+
+/* Butonul de back pozitionat in stanga */
+.settings-container .back-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Icon pentru buton */
+.settings-container .back-btn:hover {
+    color: #ccc;
+    opacity: 0.7;
+}
+
+/* Titlu centrat */
+.settings-container .button-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* -----------------------------------------------
+   Formular de setari
+----------------------------------------------- */
+.settings-form {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grup de input-uri */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    color: #bbb;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    background-color: #444;
+    color: white;
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+}
+
+/* -----------------------------------------------
+   Switch pentru autentificare in doi pasi
+----------------------------------------------- */
+.switch-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.switch-group label {
+    color: #bbb;
+    font-size: 15px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+/* Switch stilizat */
+.switch {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 50px;
+}
+
+.switch input:checked + .slider {
+    background-color: #2196f3;
+}
+
+.switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* -----------------------------------------------
+   Butonul de salvare a setarilor
+----------------------------------------------- */
+.settings-btn {
+    padding: 12px 20px;
+    background-color: #444;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.settings-btn:hover {
+    background-color: #555;
+}
+
+/* -----------------------------------------------
+   Responsivitate pentru ecrane mici
+----------------------------------------------- */
+@media (max-width: 480px) {
+    .settings-form {
+        padding: 20px;
+    }
+
+    .input-group input,
+    .input-group select {
+        font-size: 12px;
+    }
+
+    .settings-btn {
+        font-size: 14px;
+    }
+}

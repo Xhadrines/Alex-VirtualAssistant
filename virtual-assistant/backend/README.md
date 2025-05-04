@@ -11,12 +11,12 @@ Pentru a rula aplicația, trebuie să ai instalat:
 
 2. Creează mediul virtual folosind comanda:
 ```bash
-python -m venv venv
+python -m venv .venv
 ```
 
 3. Activează mediul virtual folosind comanda:
 ```bash
-.\venv\Scripts\activate
+.\.venv\Scripts\activate
 ```
 
 4. Instalează dependențele folosind comanda:

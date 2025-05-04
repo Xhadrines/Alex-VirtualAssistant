@@ -1,10 +1,13 @@
 # Backend
+.venv/*
 venv/*
 __pycache__/*
 *.pyc
 *.pyo
 *.pyd
 db.sqlite3
+pdfs/*
+docs/*
 
 # Frontend
 node_modules/*
@@ -17,7 +20,7 @@ lerna-debug.log*
 *.cache
 
 # Log files
-logs
+logs/*
 *.log
 
 # Tooling/Build

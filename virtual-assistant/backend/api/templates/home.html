@@ -1,35 +1,23 @@
-<!DOCTYPE html> <!-- Declara tipul de document ca fiind HTML5 -->
-<html lang="ro"> <!-- Defineste limba documentului ca fiind romana -->
+<!DOCTYPE html>
+<html lang="ro">
 <head>
-    <meta charset="UTF-8"> <!-- Specifica setul de caractere utilizat in document (UTF-8) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Asigura ca site-ul este responsive pe dispozitive mobile -->
-    <title>Pagina Principala</title> <!-- Titlul paginii, care va aparea in tab-ul browserului -->
-    
-    <!-- Bootstrap CSS CDN - Incarca stilurile CSS de la Bootstrap pentru a folosi componentele predefinite de design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principala</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Container pentru continutul principal al paginii, cu o marja superioara (mt-5) -->
     <div class="container mt-5">
-        <!-- Titlul principal al paginii, centrat -->
         <h1 class="text-center">Bine ai venit!</h1>
-        
-        <!-- Text centrat care invita utilizatorul sa aleaga un endpoint -->
         <p class="text-center">Alege un endpoint din lista:</p>
-        
-        <!-- Lista de elemente, fiecare reprezentand un endpoint -->
         <ul class="list-group">
-            <!-- Structura de bucla pentru a itera printr-o lista de endpointuri -->
-            {% for endpoint in endpoints %}
+            {% for name, url in endpoints %}
                 <li class="list-group-item">
-                    <!-- Link pentru fiecare endpoint, cu un buton Bootstrap care duce la URL-ul specificat -->
-                    <a href="{{ endpoint.url }}" class="btn btn-primary">{{ endpoint.name }}</a>
+                    <a href="{{ url }}" class="btn btn-primary">{{ name }}</a>
                 </li>
             {% endfor %}
         </ul>
     </div>
-
-    <!-- Bootstrap JS CDN - Incarcarea JavaScript-ului necesar pentru functionalitati dinamice -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

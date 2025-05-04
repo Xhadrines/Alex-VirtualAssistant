@@ -1,4 +1,8 @@
-/* Butonul de deschidere chat */
+/* -----------------------------------------------
+   Butoane de deschidere si inchidere
+----------------------------------------------- */
+
+/* Butonul de deschidere a chat-ului */
 .chat-toggle-btn {
     position: fixed;
     bottom: 80px;
@@ -12,6 +16,34 @@
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+/* Butoanele de deschidere si inchidere din header-ul chat-ului */
+.chat-header .chat-open,
+.chat-header .chat-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Stilizarea butoanelor de inchidere si deschidere */
+.chat-close, .chat-open {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+/* Imaginile butoanelor de deschidere si inchidere */
+.chat-close img, .chat-open img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* -----------------------------------------------
+   Containerul si Header-ul Chat-ului
+----------------------------------------------- */
 
 /* Containerul chat-ului */
 .chat-container {
@@ -46,41 +78,14 @@
     border-top-right-radius: 8px;
 }
 
-/* Butoanele de deschidere si inchidere a chat-ului */
-.chat-header .chat-open,
-.chat-header .chat-close {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-/* Stilizarea butoanelor de inchidere si deschidere */
-.chat-close {
-    width: 20px;
-    height: 20px;
-    padding: 0;
-}
-
-.chat-open {
-    width: 20px;
-    height: 20px;
-    padding: 0;
-}
-
-/* Imaginile butoanelor de deschidere si inchidere */
-.chat-close img,
-.chat-open img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
 /* Titlul chat-ului */
 .chat-header .chat-title {
     font-weight: bold;
 }
+
+/* -----------------------------------------------
+   Mesajele din Chat
+----------------------------------------------- */
 
 /* Sectiunea mesajelor din chat */
 .chat-messages {
@@ -98,6 +103,8 @@
     margin: 5px 0;
     border-radius: 5px;
     color: #fff;
+    scrollbar-width: thin;
+    scrollbar-color: #444 #2c2c2c;
 }
 
 /* Stilizare pentru scrollbar-ul mesajelor */
@@ -106,19 +113,23 @@
 }
 
 .chat-messages::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #2c2c2c;
     border-radius: 10px;
 }
 
 .chat-messages::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #444;
     border-radius: 10px;
     transition: background 0.3s ease;
 }
 
 .chat-messages::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #666;
 }
+
+/* -----------------------------------------------
+   Footer-ul Chat-ului si Input-ul
+----------------------------------------------- */
 
 /* Sectiunea de input si trimitere mesaj */
 .chat-footer {
@@ -127,19 +138,6 @@
     background-color: #333;
     border-top: 1px solid #444;
     justify-content: space-between;
-}
-
-/* Butonul de trimitere a mesajului */
-.chat-send-btn {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-}
-
-.chat-send-btn img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
 }
 
 /* Campul de input pentru mesaje */
@@ -158,6 +156,20 @@
     color: #bbb;
 }
 
+/* Butonul de trimitere a mesajului */
+.chat-send-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+}
+
+/* Imaginile butonului de trimitere */
+.chat-send-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 /* Butonul de trimitere mesaje din footer */
 .chat-footer button {
     padding: 10px;
@@ -172,6 +184,10 @@
 .chat-footer button:hover {
     background-color: #777;
 }
+
+/* -----------------------------------------------
+   Mesaje de Stare (Loading si Eroare)
+----------------------------------------------- */
 
 /* Mesajul de incarcare */
 .loading-message {
