@@ -6,7 +6,6 @@ Acest proiect reprezintă o nouă funcționalitate pentru site-ul **Facultății
 
 Prin intermediul acestei funcționalități, studenții pot obține rapid informații precum:
 * Informații despre grupa în care se află.
-* Informații despre orar.
 * Crearea de adeverințe online.
 * Răspunsuri la întrebări frecvente despre taxe, burse și alte informații.
 
@@ -52,3 +51,4 @@ git clone https://github.com/Xhadrines/Alex-VirtualAssistant.git
 ## Alte informații
 **Documentație:** [Apasă-mă](Documentatie.pdf)
 
+**Demo:** [Apasă-mă](Demo.mkv)
