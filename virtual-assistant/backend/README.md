@@ -36,9 +36,9 @@ python manage.py migrate
 
 7. Instalează Ollama mergând pe [site-ul oficial Ollama](https://ollama.com/).
 
-8. Instalează modelul Llama 3.1 folosind comanda:
+8. Instalează modelul Llama 3.2 folosind comanda:
 ```bash
-ollama pull llama3.1
+ollama pull llama3.2
 ```
 
 9. Rulează proiectul folosind comanda:

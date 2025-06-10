@@ -2,7 +2,7 @@ import os
 import logging
 import requests
 from bs4 import BeautifulSoup
-import ollama
+# import ollama
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +15,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from .models import Facultate, Specializare, Grupa, UserProfile, Adevetinta, ConversationHistory
 from .serializers import FacultateSerializer, SpecializareSerializer, GrupaSerializer, UserSerializer, UserProfileSerializer, AdevetintaSerializer, ConversationHistorySerializer
+from .rag import RAG
 
 # TODO: Pentru a folosi filtrul pentru specializare si grupa la final trebuie introdus .../?[numele variabilei respectiva]=[id-ul respectiv] 
 # TODO: Pentru a descarca pdf-urile de pe site trebuie sa trimiti o cerere json goala "{}"
@@ -216,6 +217,7 @@ class AdevetintaDeleteView(generics.DestroyAPIView):
 
 class ConversationChat(APIView):
     permission_classes = [AllowAny]
+    rag = RAG()
 
     def post (self, request):
         try:
@@ -224,13 +226,15 @@ class ConversationChat(APIView):
             if not question:
                 return Response({"error": "Mesajul nu poate fi gol."}, status=status.HTTP_400_BAD_REQUEST)
             
-            message = [
-                {"role": "system", "content": "Te rog sa raspunzi in limba romana, pe tine te cheama 'Alex' si esti asistentul virtual pentru 'Facultatea de Inginerie Electrica si Stiinta Calculatoarelor'."},
-                {"role": "user", "content": question}
-            ]
+            # message = [
+            #     {"role": "system", "content": "Te rog sa raspunzi in limba romana, pe tine te cheama 'Alex' si esti asistentul virtual pentru 'Facultatea de Inginerie Electrica si Stiinta Calculatoarelor'."},
+            #     {"role": "user", "content": question}
+            # ]
 
-            response = ollama.chat(model="llama3.1", messages=message)
-            answer = response['message']['content']
+            # response = ollama.chat(model="llama3.1", messages=message)
+            # answer = response['message']['content']
+
+            answer = self.rag.get_response(question)
 
             if request.user and request.user.is_authenticated:
                 logger.info(f"User {request.user.username} is authenticated.")
