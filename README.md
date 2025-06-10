@@ -51,4 +51,4 @@ git clone https://github.com/Xhadrines/Alex-VirtualAssistant.git
 ## Alte informații
 **Documentație:** [Apasă-mă](Documentatie.pdf)
 
-**Demo:** [Apasă-mă](Demo.mkv)
+**Demo:** [Apasă-mă](Demo.mp4)
