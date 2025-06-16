@@ -46,7 +46,18 @@ def create_default_data(sender, **kwargs):
 
         logger.info(f"Specializare {'creata' if created else 'existenta'}: {specializare_default}")
 
-        grupa_default, created = Grupa.objects.get_or_create(
+        grupa_default_1, created = Grupa.objects.get_or_create(
+            facultate=facultate_default,
+            specializare=specializare_default,
+            an_universitar="2024/2025",
+            an_studiu=4,
+            grupa=2,
+            semigrupa="A"
+        )
+
+        logger.info(f"Grupa {'creata' if created else 'existenta'}: {grupa_default_1}")
+
+        grupa_default_2, created = Grupa.objects.get_or_create(
             facultate=facultate_default,
             specializare=specializare_default,
             an_universitar="2024/2025",
@@ -55,7 +66,7 @@ def create_default_data(sender, **kwargs):
             semigrupa="B"
         )
 
-        logger.info(f"Grupa {'creata' if created else 'existenta'}: {grupa_default}")
+        logger.info(f"Grupa {'creata' if created else 'existenta'}: {grupa_default_2}")
 
         user_default, created = User.objects.get_or_create(
             username="student",
@@ -78,10 +89,11 @@ def create_default_data(sender, **kwargs):
         user_profile_default, created = UserProfile.objects.get_or_create(
             user=user_default,
             defaults={
-                'id_student': 123456,  # <- completează cu un ID student valid
+                'id_student': 123456,
                 'facultate': facultate_default,
                 'specializare': specializare_default,
-                'grupa': grupa_default,
+                'grupa': grupa_default_2,
+                'semigrupa': "B",
                 'tip_taxa': UserProfile.TipTaxa.FARA_TAXA,
                 'an_universitar': "2024/2025",
                 'an_studiu': 4,

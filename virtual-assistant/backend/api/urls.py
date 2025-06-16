@@ -24,6 +24,10 @@ urlpatterns = [
 
     path('login/', LoginView.as_view(), name='login'),
 
+    path('user/email/', CheckEmailExistsView.as_view(), name='user-email'),
+
+    path('user/active/', ActivateUserView.as_view(), name='user-active'),
+
     path('user/list/', UserListView.as_view(), name='user-list'),
     path('user/create/', UserCreateView.as_view(), name='user-create'),
     path('user/update/<int:pk>/', UserUpdateView.as_view(), name='user-update'),
@@ -48,4 +52,6 @@ urlpatterns = [
     path('conversation/history/filter/<int:pk>/', ConversationHistoryFilteredView.as_view(), name='conversation-history-filter'),
 
     path('download/files/', DownloadFilesView.as_view(), name='download-files'),
+
+    path('user/import/', ImportUsersFromExcelView.as_view(), name='user-import'),
 ]

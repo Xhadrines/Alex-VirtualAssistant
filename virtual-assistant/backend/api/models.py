@@ -98,6 +98,7 @@ class UserProfile(models.Model):
     facultate = models.ForeignKey(Facultate, on_delete=models.CASCADE)
     specializare = models.ForeignKey(Specializare, on_delete=models.CASCADE)
     grupa = models.ForeignKey(Grupa, on_delete=models.CASCADE)
+    semigrupa = models.CharField(max_length=1)
     tip_taxa = models.CharField(max_length=9, choices=TipTaxa)
     an_universitar = models.CharField(max_length=9)
     an_studiu = models.IntegerField()

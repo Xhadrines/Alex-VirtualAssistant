@@ -13,6 +13,9 @@ const ChatPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [user, setUser] = useState(null);
 
+    const [isSuperuser, setIsSuperuser] = useState(false);
+    const [isStaff, setIsStaff] = useState(false);
+
     const messagesEndRef = useRef(null);
     const navigate = useNavigate();
 
@@ -21,8 +24,13 @@ const ChatPage = () => {
         const username = localStorage.getItem('username');
         const userId = localStorage.getItem('user_id');
 
+        const superuserFlag = localStorage.getItem('is_superuser') === 'true';
+        const staffFlag = localStorage.getItem('is_staff') === 'true';
+
         if (token && username && userId) {
             setUser({ username });
+            setIsSuperuser(superuserFlag);
+            setIsStaff(staffFlag);
             fetchConversationHistory(userId);
         } else {
             navigate('/login');
@@ -148,11 +156,13 @@ const ChatPage = () => {
                             <img src="/user.png" alt="User" className="button-icon" />
                         </button>
                         <div className="user-menu-dropdown">
-                            <button onClick={navigateToSettings}>
-                                <img src="/settings.png" alt="Settings" className="button-icon" /> Setari
-                            </button>
+                            {(isSuperuser || isStaff) && (
+                                <button onClick={navigateToSettings}>
+                                    <img src="/settings.png" alt="Settings" className="button-icon" /> Setări
+                                </button>
+                            )}
                             <button onClick={handleLogout}>
-                                <img src="/logout.png" alt="Logout" className="button-icon" /> Logout
+                                <img src="/logout.png" alt="Logout" className="button-icon" /> Deconectare
                             </button>
                         </div>
                     </div>

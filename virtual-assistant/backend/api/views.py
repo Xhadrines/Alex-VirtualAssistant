@@ -2,7 +2,6 @@ import os
 import logging
 import requests
 from bs4 import BeautifulSoup
-# import ollama
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,6 +20,12 @@ from dateutil.relativedelta import relativedelta
 from django.template.loader import render_to_string
 from weasyprint import HTML
 import uuid
+from django.http import JsonResponse
+from openpyxl import load_workbook
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+from django.utils.decorators import method_decorator
+from django.core.exceptions import ObjectDoesNotExist
 
 # TODO: Pentru a folosi filtrul pentru specializare si grupa la final trebuie introdus .../?[numele variabilei respectiva]=[id-ul respectiv] 
 # TODO: Pentru a descarca pdf-urile de pe site trebuie sa trimiti o cerere json goala "{}"
@@ -170,11 +175,60 @@ class LoginView(APIView):
                     "user_id": auth_user.id,
                     "first_name": auth_user.first_name,
                     "last_name": auth_user.last_name,
+                    "is_superuser": auth_user.is_superuser,
+                    "is_staff": auth_user.is_staff,
                 })
             else:
                 return Response({"error": "Parola gresita"}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response({"error": "Utilizatorul nu exista"}, status=status.HTTP_404_NOT_FOUND)
+        
+# ----------------------------------------------------------------------------------------------------
+
+class CheckEmailExistsView(APIView):
+    def get(self, request, *args, **kwargs):
+        email = request.query_params.get('email')
+        if email is None:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        exists = User.objects.filter(email=email).exists()
+        return Response({'email_exists': exists})
+    
+# ----------------------------------------------------------------------------------------------------
+
+class ActivateUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        if not email or not username or not password:
+            return Response(
+                {'error': 'Email, username, and password are required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            user = User.objects.get(email=email)
+        except ObjectDoesNotExist:
+            return Response(
+                {'error': 'No user with the provided email found.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        if user.username != email and user.username:
+            return Response(
+                {'error': 'User already has a different username set.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        user.username = username
+        user.set_password(password)
+        user.is_active = True
+        user.save()
+
+        return Response({'success': 'User activated and credentials set.'}, status=status.HTTP_200_OK)
+
         
 # ----------------------------------------------------------------------------------------------------
 
@@ -229,6 +283,22 @@ class ConversationChat(APIView):
             question = request.data.get('message')
             if not question:
                 return Response({"error": "Mesajul nu poate fi gol."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            if question.strip().lower() == "comenzi":
+                answer_text = (
+                    "Comenzile disponibile sunt:\n"
+                    "- Genereaza o adeverinta cu motivul [motiv]\n"
+                    "  Exemplu: Genereaza o adeverinta cu motivul angajare\n"
+                )
+
+                if request.user and request.user.is_authenticated:
+                    ConversationHistory.objects.create(
+                        user=request.user,
+                        question=question,
+                        answer=answer_text
+                    )
+
+                return Response({"answer": answer_text}, status=status.HTTP_200_OK)
             
             if request.user and request.user.is_authenticated and question.lower().startswith("genereaza o adeverinta cu motivul"):
                 user = request.user
@@ -414,6 +484,89 @@ class DownloadFilesView(APIView):
 
 # ----------------------------------------------------------------------------------------------------
 
+@method_decorator(csrf_exempt, name='dispatch')
+class ImportUsersFromExcelView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        if 'file' not in request.FILES:
+            return JsonResponse({'error': 'Metoda trebuie POST cu fisierul Excel'}, status=400)
+
+        excel_file = request.FILES['file']
+        wb = load_workbook(filename=excel_file, read_only=True)
+        ws = wb.active
+
+        an_universitar = ws['A5'].value
+
+        row = 9
+        while True:
+            id_student = ws[f'B{row}'].value
+            if id_student is None:
+                break
+            
+            nume = ws[f'C{row}'].value
+            prenume = ws[f'D{row}'].value
+            email = ws[f'E{row}'].value
+            semitrupa_code = ws[f'F{row}'].value
+            tip_taxa = ws[f'G{row}'].value
+            
+            if semitrupa_code and len(semitrupa_code) >= 5:
+                try:
+                    id_facultate = int(semitrupa_code[0])
+                    id_specializare = int(semitrupa_code[1])
+                    an_studiu_gr = int(semitrupa_code[2])
+                    grupa_nr = int(semitrupa_code[3])
+                    semigrupa_char = semitrupa_code[4]
+                except ValueError:
+                    return JsonResponse({'error': f'Semitrupa code invalid la randul {row}'}, status=400)
+            else:
+                return JsonResponse({'error': f'Semitrupa code invalid la randul {row}'}, status=400)
+
+            try:
+                facultate = Facultate.objects.get(id=id_facultate)
+                specializare = Specializare.objects.get(id=id_specializare, facultate=facultate)
+                grupa = Grupa.objects.get(
+                    facultate=facultate,
+                    specializare=specializare,
+                    an_studiu=an_studiu_gr,
+                    grupa=grupa_nr,
+                    semigrupa=semigrupa_char
+                )
+            except Facultate.DoesNotExist:
+                return JsonResponse({'error': f'Facultate cu id {id_facultate} nu exista la randul {row}'}, status=400)
+            except Specializare.DoesNotExist:
+                return JsonResponse({'error': f'Specializare cu id {id_specializare} nu exista la randul {row}'}, status=400)
+            except Grupa.DoesNotExist:
+                return JsonResponse({'error': f'Grupa nu exista la randul {row}'}, status=400)
+
+            user, created = User.objects.get_or_create(username=email, defaults={
+                'first_name': prenume,
+                'last_name': nume,
+                'email': email
+            })
+
+            if not created:
+                user.first_name = prenume
+                user.last_name = nume
+                user.email = email
+                user.save()
+
+            user_profile, _ = UserProfile.objects.get_or_create(user=user)
+            user_profile.id_student = id_student
+            user_profile.facultate = facultate
+            user_profile.specializare = specializare
+            user_profile.grupa = grupa
+            user_profile.semigrupa = semigrupa_char
+            user_profile.tip_taxa = tip_taxa
+            user_profile.an_universitar = an_universitar
+            user_profile.an_studiu = an_studiu_gr
+            user_profile.save()
+
+            row += 1
+
+        return JsonResponse({'status': 'Succes', 'message': f'Importate {row-9} utilizatori'})
+
+# ----------------------------------------------------------------------------------------------------
+
 class HomeView(TemplateView):
     template_name = "home.html"
 
@@ -449,6 +602,10 @@ class HomeView(TemplateView):
 
             ('Login', reverse_lazy('login')),
 
+            ('User Email', reverse_lazy('user-email')),
+
+            ('User Active', reverse_lazy('user-active')),
+
             ('List User', reverse_lazy('user-list')),
             ('Create User', reverse_lazy('user-create')),
             *[('Update User {}'.format(user.username), reverse_lazy('user-update', kwargs={'pk': user.pk})) for user in users],
@@ -472,7 +629,9 @@ class HomeView(TemplateView):
             *[('Delete Conversation History {}'.format(conversation_history.nume), reverse_lazy('conversation-history-delete', kwargs={'pk': conversation_history.pk})) for conversation_history in conversation_histories],
             *[('Filter Conversation History {}'.format(conversation_history.nume), reverse_lazy('conversation-history-filter', kwargs={'pk': conversation_history.pk})) for conversation_history in conversation_histories],
 
-            ('Download Files', reverse_lazy('download-files'))
+            ('Download Files', reverse_lazy('download-files')),
+
+            ('User Import', reverse_lazy('user-import'))
         ]
         return context
 

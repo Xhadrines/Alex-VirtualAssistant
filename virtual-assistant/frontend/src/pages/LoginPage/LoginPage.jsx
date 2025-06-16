@@ -33,6 +33,9 @@ const LoginPage = () => {
                 localStorage.setItem('first_name', response.data.first_name);
                 localStorage.setItem('last_name', response.data.last_name);
 
+                localStorage.setItem('is_superuser', response.data.is_superuser ? 'true' : 'false');
+                localStorage.setItem('is_staff', response.data.is_staff ? 'true' : 'false');
+
                 setFeedback('Te-ai logat cu succes!');
                 setFeedbackColor('green');
 
@@ -63,11 +66,11 @@ const LoginPage = () => {
                 <button className="back-btn" onClick={navigateToHome}>
                     <img src="/back.png" alt="Inapoi" className="button-icon" />
                 </button>
-                <h1>Login</h1>
+                <h1>Autentificare</h1>
             </div>
             <div className="login-form-container">
                 <div className="input-group">
-                    <label htmlFor="username">Username sau Email</label>
+                    <label htmlFor="username">Utilizator sau Email</label>
                     <input
                         type="text"
                         id="username"
@@ -78,7 +81,7 @@ const LoginPage = () => {
                     />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Parolă</label>
                     <input
                         type="password"
                         id="password"
@@ -88,7 +91,15 @@ const LoginPage = () => {
                         onKeyDown={handleKeyDown}
                     />
                 </div>
-                <button className="login-btn" onClick={handleLogin}>Login</button>
+                <button className="login-btn" onClick={handleLogin}>Conectare</button>
+                <div className="register-redirect">
+                    <button
+                        type="button"
+                        className="register-link"
+                        onClick={() => navigate('/register')}
+                    > Nu ai cont? Creează unul!
+                    </button>
+                </div>
             </div>
             {feedback && (
                 <div className="feedback" style={{ color: feedbackColor }}>

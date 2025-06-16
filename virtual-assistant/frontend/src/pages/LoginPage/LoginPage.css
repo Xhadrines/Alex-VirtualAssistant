@@ -167,3 +167,27 @@
     text-align: center;
     width: 100%;
 }
+
+/* -----------------------------------------------
+   Link pentru înregistrare
+----------------------------------------------- */
+.register-redirect {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-link {
+    background: none;
+    border: none;
+    color: #00aaff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: #66d0ff;
+}
