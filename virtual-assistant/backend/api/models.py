@@ -89,10 +89,18 @@ class UserProfile(models.Model):
     Definirea modelului UserProfile.
     """
 
+    class TipTaxa(models.TextChoices):
+        FARA_TAXA = 'fara taxa'
+        CU_TAXA = 'cu taxa'
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_student = models.IntegerField()
     facultate = models.ForeignKey(Facultate, on_delete=models.CASCADE)
     specializare = models.ForeignKey(Specializare, on_delete=models.CASCADE)
     grupa = models.ForeignKey(Grupa, on_delete=models.CASCADE)
+    tip_taxa = models.CharField(max_length=9, choices=TipTaxa)
+    an_universitar = models.CharField(max_length=9)
+    an_studiu = models.IntegerField()
 
     is_2fa_enable = models.BooleanField(default=False)
     totp_secret_key = models.CharField(max_length=32, blank=True, null=True)
@@ -126,6 +134,10 @@ class Adevetinta(models.Model):
         COMPLETED = 'completed'
         REJECTED = 'rejected'
 
+    class TipTaxa(models.TextChoices):
+        FARA_TAXA = 'fara taxa'
+        CU_TAXA = 'cu taxa'
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     last_name = models.CharField(max_length=150)
@@ -133,6 +145,7 @@ class Adevetinta(models.Model):
     an_universitar = models.CharField(max_length=9)
     an_studiu = models.IntegerField()
     specializare = models.CharField(max_length=150)
+    tip_taxa = models.CharField(max_length=9, choices=TipTaxa)
     motiv = models.TextField()
     data_emitere = models.DateField(auto_now_add=True)
     numar = models.IntegerField()

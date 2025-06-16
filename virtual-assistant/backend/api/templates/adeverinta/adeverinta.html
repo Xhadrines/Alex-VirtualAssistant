@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeverință</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/adeverinta.css' %}">
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="certificate-header">
+            <div class="university-name">
+                UNIVERSITATEA "ȘTEFAN CEL MARE" DIN SUCEAVA<br>
+                FACULTATEA DE INGINERIE ELECTRICĂ ȘI ȘTIINȚA CALCULATOARELOR
+            </div>
+            <div class="certificate-number">
+                Nr. <span class="dotted-field">{{ numar }}</span>
+                 /FIESC/ 
+                <span class="dotted-field">{{ data }}</span>
+            </div>
+        </div>
+
+        <div class="certificate-content">
+            <p class="certificate-title">ADEVERINȚĂ</p>
+
+            <p>
+                Studentul(a)
+                <span class="dotted-field">{{ nume }}</span>
+                <span class="dotted-field">{{ prenume }}</span>
+                este înscris(ă) în anul universitar
+                <span class="dotted-field">{{ anUniversitar }}</span>
+                în anul
+                <span class="dotted-field">{{ anul }}</span>
+                de studii, program / domeniu de studii - licență:
+            </p>
+            <ul class="program-list">
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Calculatoare" disabled
+                            {% if specializare == "Calculatoare" %}checked{% endif %}>
+                        <span class="checkmark"></span> Calculatoare
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Automatica" disabled
+                            {% if specializare == "Automatica" %}checked{% endif %}>
+                        <span class="checkmark"></span> Automatică și Informatică Aplicată
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Telecom" disabled
+                            {% if specializare == "Telecom" %}checked{% endif %}>
+                        <span class="checkmark"></span> Inginerie Electronică. Telecomunicații și Tehnologii Informaționale / Rețele și Software de Telecomunicații
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Medicale" disabled
+                            {% if specializare == "Medicale" %}checked{% endif %}>
+                        <span class="checkmark"></span> Echipamente și Sisteme Medicale
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Sisteme Electrice" disabled
+                            {% if specializare == "Sisteme Electrice" %}checked{% endif %}>
+                        <span class="checkmark"></span> Sisteme Electrice
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Energetica" disabled
+                            {% if specializare == "Energetica" %}checked{% endif %}>
+                        <span class="checkmark"></span> Inginerie Energetică / Energetică și Tehnologii Informatice
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="program" value="Auto" disabled
+                            {% if specializare == "Auto" %}checked{% endif %}>
+                        <span class="checkmark"></span> Echipamente și Sisteme de Comandă și Control pentru Autovehicule
+                    </label>
+                </li>
+            </ul>
+
+
+
+            <p>
+                forma de învățământ IF, regim: <span class="dotted-field">{{ regim }}</span><br>
+            </p>
+
+            <p>
+                Adeverința se eliberează pentru a-i servi la
+                <span class="dotted-multiline">{{ motiv1 }}</span><br>
+                <span class="dotted-multiline">{{ motiv2 }}</span>
+            </p>
+        </div>
+
+        <div class="certificate-footer">
+            <div class="footer-section decan">
+                <strong>DECAN,</strong>
+                Prof.univ.dr.ing. Laurențiu-Dan MILICI
+            </div>
+            <div class="footer-section secretar">
+                <strong>SECRETAR ȘEF,</strong>
+                Elena CURELARU
+            </div>
+            <div class="footer-section secretariat">
+                <strong>SECRETARIAT,</strong>
+                Laura DOSPINESCU<br>
+                Lucia POPESCU<br>
+                Otilia FRUNZĂ
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -16,6 +16,11 @@ from django.urls import reverse_lazy
 from .models import Facultate, Specializare, Grupa, UserProfile, Adevetinta, ConversationHistory
 from .serializers import FacultateSerializer, SpecializareSerializer, GrupaSerializer, UserSerializer, UserProfileSerializer, AdevetintaSerializer, ConversationHistorySerializer
 from .rag import RAG
+from django.utils import timezone
+from dateutil.relativedelta import relativedelta
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import uuid
 
 # TODO: Pentru a folosi filtrul pentru specializare si grupa la final trebuie introdus .../?[numele variabilei respectiva]=[id-ul respectiv] 
 # TODO: Pentru a descarca pdf-urile de pe site trebuie sa trimiti o cerere json goala "{}"
@@ -219,20 +224,87 @@ class ConversationChat(APIView):
     permission_classes = [AllowAny]
     rag = RAG()
 
-    def post (self, request):
+    def post(self, request):
         try:
             question = request.data.get('message')
-
             if not question:
                 return Response({"error": "Mesajul nu poate fi gol."}, status=status.HTTP_400_BAD_REQUEST)
             
-            # message = [
-            #     {"role": "system", "content": "Te rog sa raspunzi in limba romana, pe tine te cheama 'Alex' si esti asistentul virtual pentru 'Facultatea de Inginerie Electrica si Stiinta Calculatoarelor'."},
-            #     {"role": "user", "content": question}
-            # ]
+            if request.user and request.user.is_authenticated and question.lower().startswith("genereaza o adeverinta cu motivul"):
+                user = request.user
+                trigger = "genereaza o adeverinta cu motivul"
+                motiv = question[len(trigger):].strip()
+                if not motiv:
+                    return Response({"answer": "Te rog specifică motivul pentru adeverință."}, status=status.HTTP_200_OK)
 
-            # response = ollama.chat(model="llama3.1", messages=message)
-            # answer = response['message']['content']
+                try:
+                    profile = UserProfile.objects.get(user=user)
+                except UserProfile.DoesNotExist:
+                    return Response({"error": "Profilul utilizatorului nu a fost găsit."}, status=status.HTTP_404_NOT_FOUND)
+
+                numar = Adevetinta.objects.count() + 1
+                data_emitere = timezone.now().date()
+
+                adeverinta = Adevetinta.objects.create(
+                    user=user,
+                    last_name=user.last_name,
+                    first_name=user.first_name,
+                    an_universitar=profile.an_universitar,
+                    an_studiu=profile.an_studiu,
+                    specializare=profile.specializare.nume,
+                    tip_taxa=profile.tip_taxa,
+                    motiv=motiv,
+                    numar=numar,
+                    expires_at=timezone.now() + relativedelta(years=1)
+                )
+
+                motiv = adeverinta.motiv or ""
+                max_len = 70
+                split_pos = motiv.rfind(" ", 0, max_len)
+                if split_pos == -1:
+                    split_pos = max_len
+                motiv1 = motiv[:split_pos]
+                motiv2 = motiv[split_pos:].strip()
+
+                context = {
+                    "numar": adeverinta.numar,
+                    "data": data_emitere.strftime("%d.%m.%Y"),
+                    "nume": adeverinta.last_name,
+                    "prenume": adeverinta.first_name,
+                    "anUniversitar": adeverinta.an_universitar,
+                    "anul": adeverinta.an_studiu,
+                    "specializare": adeverinta.specializare,
+                    "regim": adeverinta.tip_taxa,
+                    "motiv1": motiv1,
+                    "motiv2": motiv2,
+                }
+
+                html_string = render_to_string('adeverinta/adeverinta.html', context)
+
+                pdf_bytes = HTML(string=html_string, base_url=request.build_absolute_uri('/')).write_pdf()
+
+                unique_id = str(uuid.uuid4())
+                filename = f"adeverinta_{unique_id}.pdf"
+                pdf_path = os.path.join(settings.MEDIA_ROOT, filename)
+
+                if not os.path.exists(settings.MEDIA_ROOT):
+                        os.makedirs(settings.MEDIA_ROOT)
+
+                with open(pdf_path, "wb") as f:
+                    f.write(pdf_bytes)
+
+                pdf_url = request.build_absolute_uri(settings.MEDIA_URL + filename)
+
+                answer_text = f"Adeverinta a fost creata si e valabila un an de zile: {pdf_url}"
+
+                if request.user and request.user.is_authenticated:
+                    ConversationHistory.objects.create(
+                        user=request.user,
+                        question=question,
+                        answer=answer_text
+                    )
+
+                return Response({"answer": answer_text}, status=status.HTTP_200_OK)
 
             answer = self.rag.get_response(question)
 
@@ -244,7 +316,7 @@ class ConversationChat(APIView):
                     answer=answer
                 )
 
-            return Response({"answer" : answer}, status=status.HTTP_200_OK)
+            return Response({"answer": answer}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

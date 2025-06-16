@@ -90,6 +90,22 @@ const ChatPage = () => {
         }
     };
 
+    const renderMessageWithLinks = (text) => {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        const parts = text.split(urlRegex);
+
+        return parts.map((part, index) => {
+            if (urlRegex.test(part)) {
+                return (
+                    <a key={index} href={part} target="_blank" rel="noopener noreferrer">
+                        {part}
+                    </a>
+                );
+            }
+            return part;
+        });
+    };
+
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -150,7 +166,7 @@ const ChatPage = () => {
                 <div className="message-container">
                     {messages.map((message, index) => (
                         <div key={index} className={message.sender === 'user' ? 'user-message' : 'bot-message'}>
-                            {message.text}
+                            {renderMessageWithLinks(message.text)}
                         </div>
                     ))}
                     {loading && <div className="loading-message">Se genereaza raspunsul...</div>}

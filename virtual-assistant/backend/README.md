@@ -7,43 +7,48 @@ Pentru a rula aplicația, trebuie să ai instalat:
 * **pip** (v24.3.1 sau o versiune mai mare)
 
 ## Instalare
-1. Asigură-te că te afli în directorul `backend`
+1. Asigură-te că ai instalat gtk3-runtime de pe
+```bash
+https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
+```
 
-2. Creează mediul virtual folosind comanda:
+2. Asigură-te că te afli în directorul `backend`
+
+3. Creează mediul virtual folosind comanda:
 ```bash
 python -m venv .venv
 ```
 
-3. Activează mediul virtual folosind comanda:
+4. Activează mediul virtual folosind comanda:
 ```bash
 .\.venv\Scripts\activate
 ```
 
-4. Instalează dependențele folosind comanda:
+5. Instalează dependențele folosind comanda:
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Crează migrațiile folosind comanda:
+6. Crează migrațiile folosind comanda:
 ```bash
 python manage.py makemigrations
 ```
 
-6. Aplică migrațiile folosind comanda:
+7. Aplică migrațiile folosind comanda:
 ```bash
 python manage.py migrate
 ```
 
-7. Instalează Ollama mergând pe [site-ul oficial Ollama](https://ollama.com/).
+8. Instalează Ollama mergând pe [site-ul oficial Ollama](https://ollama.com/).
 
-8. Instalează modelul Llama 3.2 folosind comanda:
+9. Instalează modelul Llama 3.2 folosind comanda:
 ```bash
 ollama pull llama3.2
 ```
 
-9. Rulează proiectul folosind comanda:
+10. Rulează proiectul folosind comanda:
 ```bash
 python manage.py runserver
 ```
 
-10.  Proiectul rulează pe `http://127.0.0.1:2307/`.
+11.   Proiectul rulează pe `http://127.0.0.1:2307/`.

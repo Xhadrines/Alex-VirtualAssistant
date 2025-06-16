@@ -1,0 +1,185 @@
+/* Stil de bază pentru întregul body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 30px;
+    background-color: #f8f8f8;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11px;
+}
+
+/* Containerul certificatului */
+.certificate-container {
+    width: 155mm;
+    height: 115mm;
+    border: 2px solid black;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Eliminare spații verticale mari */
+p, ul, li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* Headerul certificatului */
+.certificate-header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.university-name {
+    text-align: left;
+    font-weight: bold;
+}
+
+.certificate-number {
+    text-align: right;
+    width: 100%;
+    display: block;
+}
+
+/* Titlul certificatului */
+.certificate-title {
+    text-align: center;
+    font-weight: bold;
+    margin: 6px 0;
+}
+
+/* Conținutul certificatului */
+.certificate-content {
+    text-align: justify;
+}
+
+.dotted-field {
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    text-align: left;
+    padding: 0 4px;
+    font-family: 'Times New Roman', Times, serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#numar {
+    min-width: 25px;
+}
+
+#data {
+    min-width: 50px;
+}
+
+#nume {
+    text-align: right;
+}
+
+#prenume {
+    text-align: left;
+}
+
+#an-universitar {
+    min-width: 50px;
+}
+
+#anul {
+    min-width: 10px;
+}
+
+#regim {
+    min-width: 50px;
+}
+
+/* Container pentru motiv */
+.dotted-multiline {
+    display: inline-block;
+    min-width: 300px;
+    padding-bottom: 4px;
+    border-bottom: 1px dotted black;
+    white-space: normal;
+    line-height: 1.2em;
+    vertical-align: bottom;
+
+    /* prevenim ruperea cuvintelor */
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+}
+
+#motiv1 {
+    min-width: 320px;
+}
+
+#motiv2 {
+    min-width: 510px;
+}
+
+.program-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.program-list li {
+    margin: 2px 0;
+}
+
+/* Footerul certificatului */
+.certificate-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 40px;
+    text-align: center;
+}
+
+.footer-section {
+    flex: 1;
+}
+
+.footer-section strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Ascunde checkbox-ul original */
+.custom-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+/* Creează caseta personalizată */
+.custom-checkbox .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 8px;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+  
+  /* Afișează X când checkbox-ul e bifat */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    content: "X";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: normal;
+    font-size: 16px;
+    color: black;
+    user-select: none;
+}
