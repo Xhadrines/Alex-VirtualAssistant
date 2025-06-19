@@ -90,7 +90,7 @@ class RAG:
         messages = [
             {
                 "role": "system",
-                "content": "Te rog sa raspunzi in limba romana, pe tine te cheama 'Alex' si esti asistentul virtual pentru 'Facultatea de Inginerie Electrica si Stiinta Calculatoarelor'."
+                "content": "Te rog sa raspunzi in limba romana, pe tine te cheama 'Alex' si esti asistentul virtual pentru 'Facultatea de Inginerie Electrica si Stiinta Calculatoarelor'. Nu trebuie sa iti spui numele de fiecare data doar cand esti intrebat."
             }
         ]
 
@@ -98,7 +98,7 @@ class RAG:
             messages.append(
                 {
                     "role": "system",
-                    "content": "Analizeaza urmatorul context si genereaza un raspuns detaliat si relevant: " + " ".join(context)
+                    "content": "Analizeaza urmatorul context si genereaza un raspuns scurt, direct si la obiect pe baza intrebarii: " + " ".join(context)
                 },
             )
 

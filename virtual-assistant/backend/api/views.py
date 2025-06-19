@@ -375,6 +375,10 @@ class ConversationChat(APIView):
                     )
 
                 return Response({"answer": answer_text}, status=status.HTTP_200_OK)
+            
+            if question.lower().startswith("genereaza o adeverinta cu motivul"):
+                answer_text = f"Doar persoanele autentificate pot genera o adeverinta!"
+                return Response({"answer": answer_text}, status=status.HTTP_200_OK)
 
             answer = self.rag.get_response(question)
 
