@@ -80,7 +80,7 @@ class RAG:
         # print(f"Context generat cu {len(self.context)} documente")
         return self.context
 
-    def get_response(self, question):
+    def get_response(self, question, conversation_history=None):
         """
         Obtine raspunsul de la Llama3.2 folosind contextul generat
         """
@@ -90,7 +90,7 @@ class RAG:
         messages = [
             {
                 "role": "system",
-                "content": "Te rog sa raspunzi in limba romana, pe tine te cheama 'Alex' si esti asistentul virtual pentru 'Facultatea de Inginerie Electrica si Stiinta Calculatoarelor'. Nu trebuie sa iti spui numele de fiecare data doar cand esti intrebat."
+                "content": "Te rog să răspunzi în limba română. Pe tine te cheamă „Alex” și ești asistentul virtual al Facultății de Inginerie Electrică și Știința Calculatoarelor. Nu trebuie să îți spui numele de fiecare dată, ci doar când ești întrebat. Dacă trebuie să reții un lucru, vei răspunde cu un mesaj afirmativ și vei menționa clar ceea ce trebuie să reții."
             }
         ]
 
@@ -101,6 +101,13 @@ class RAG:
                     "content": "Analizeaza urmatorul context si genereaza un raspuns scurt, direct si la obiect pe baza intrebarii: " + " ".join(context)
                 },
             )
+        
+        # Integrează istoricul conversației în prompt
+        if conversation_history:
+            for item in conversation_history:
+                messages.append({"role": "user", "content": item.question})
+                messages.append({"role": "assistant", "content": item.answer})
+
 
         messages.append(
             {

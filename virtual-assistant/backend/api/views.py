@@ -26,6 +26,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.core.exceptions import ObjectDoesNotExist
+import shutil
 
 # TODO: Pentru a folosi filtrul pentru specializare si grupa la final trebuie introdus .../?[numele variabilei respectiva]=[id-ul respectiv] 
 # TODO: Pentru a descarca pdf-urile de pe site trebuie sa trimiti o cerere json goala "{}"
@@ -380,7 +381,11 @@ class ConversationChat(APIView):
                 answer_text = f"Doar persoanele autentificate pot genera o adeverinta!"
                 return Response({"answer": answer_text}, status=status.HTTP_200_OK)
 
-            answer = self.rag.get_response(question)
+            conversation_history = None
+            if request.user and request.user.is_authenticated:
+                conversation_history = ConversationHistory.objects.filter(user=request.user).order_by('id')[:10]
+
+            answer = self.rag.get_response(question, conversation_history)
 
             if request.user and request.user.is_authenticated:
                 logger.info(f"User {request.user.username} is authenticated.")
@@ -432,6 +437,7 @@ class ConversationHistoryFilteredView(APIView):
 
         except ConversationHistory.DoesNotExist:
             return Response({"detail": "Utilizatorul nu are mesaje."}, status=status.HTTP_404_NOT_FOUND)
+
 # ----------------------------------------------------------------------------------------------------
 
 class DownloadFilesView(APIView):
@@ -455,6 +461,14 @@ class DownloadFilesView(APIView):
             base_dir = settings.BASE_DIR
             pdf_dir = os.path.join(base_dir, 'pdfs')
             docs_dir = os.path.join(base_dir, 'docs')
+            
+            if os.path.exists(pdf_dir):
+                shutil.rmtree(pdf_dir)
+                logger.info("Directorul 'pdfs' a fost sters.")
+            if os.path.exists(docs_dir):
+                shutil.rmtree(docs_dir)
+                logger.info("Directorul 'docs' a fost sters.")
+
             os.makedirs(pdf_dir, exist_ok=True)
             os.makedirs(docs_dir, exist_ok=True)
 
