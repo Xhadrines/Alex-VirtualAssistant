@@ -1,0 +1,109 @@
+/* Resetare stiluri implicite */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Container principal, centrat vertical și orizontal */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+}
+
+/* Titlul paginii */
+.register-container h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+/* Text email confirmat */
+.register-container p {
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* Grup input (label + input) */
+.input-group {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  color: #bbb;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* Input text/password */
+.input-group input {
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background-color: #444;
+  color: white;
+  font-size: 14px;
+}
+
+/* Placeholder input */
+.input-group input::placeholder {
+  color: #bbb;
+}
+
+/* Buton creează cont */
+.register-container > button {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 20px;
+  background-color: #444;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.register-container > button:hover {
+  background-color: #555;
+}
+
+/* Feedback text */
+.feedback {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Responsivitate pentru tablete */
+@media (max-width: 768px) {
+  .input-group input {
+    font-size: 12px;
+  }
+
+  .register-container h1 {
+    font-size: 18px;
+  }
+}
+
+/* Responsivitate telefoane */
+@media (max-width: 480px) {
+  .input-group input,
+  .register-container > button {
+    width: 100%;
+  }
+}

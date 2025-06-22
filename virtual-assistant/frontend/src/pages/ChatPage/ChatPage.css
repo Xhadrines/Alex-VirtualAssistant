@@ -2,129 +2,144 @@
    Structura generala
 -------------------------------- */
 .chatpage-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #1e1e1e;
-    color: #ccc;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #1e1e1e;
+  color: #ccc;
+  font-family: Arial, sans-serif;
 }
 
 /* -------------------------------
    Header
 -------------------------------- */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #333;
-    padding: 10px 20px;
-    border-bottom: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 10px 20px;
+  border-bottom: 1px solid #444;
 }
 
 .back-btn,
 .login-btn,
 .user-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .button-icon {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 h1 {
-    color: #fff;
-    font-size: 20px;
-    flex: 1;
-    text-align: center;
+  color: #fff;
+  font-size: 20px;
+  flex: 1;
+  text-align: center;
 }
 
 /* -------------------------------
    Meniu utilizator
 -------------------------------- */
 .user-menu {
-    position: relative;
+  position: relative;
 }
 
 .user-menu-dropdown {
-    position: absolute;
-    top: 35px;
-    right: 0;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 5px;
-    display: none;
-    flex-direction: column;
-    z-index: 10;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
 }
 
 .user-menu.open .user-menu-dropdown {
-    display: flex;
+  display: flex;
 }
 
 .user-menu-dropdown button {
-    background: none;
-    border: none;
-    color: #fff;
-    padding: 10px;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .user-menu-dropdown button:hover {
-    background-color: #444;
+  background-color: #444;
 }
 
 /* -------------------------------
    Chat Window
 -------------------------------- */
 .chat-window {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    padding-top: 80px;
-    background-color: #1e1e1e;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  padding-top: 80px;
+  background-color: #1e1e1e;
 }
 
 .message-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Mesaje utilizator si bot */
 .message {
-    max-width: 70%;
-    padding: 10px;
-    border-radius: 8px;
-    word-wrap: break-word;
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 8px;
+  word-wrap: break-word;
 }
 
 .user-message {
-    align-self: flex-end;
-    background-color: #444;
-    color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 70%;
-    word-wrap: break-word;
+  align-self: flex-end;
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
 .bot-message {
-    align-self: flex-start;
-    background-color: #333;
-    color: #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 70%;
-    word-wrap: break-word;
+  align-self: flex-start;
+  background-color: #333;
+  color: #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+/* -------------------------------
+   Liste in mesaje de la bot
+-------------------------------- */
+.bot-message ul {
+  list-style: disc inside;
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+}
+
+.bot-message li {
+  margin-bottom: 0.3rem;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* -------------------------------
@@ -132,61 +147,61 @@ h1 {
 -------------------------------- */
 .loading-message,
 .error-message {
-    font-size: 14px;
-    text-align: center;
-    padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
 }
 
 .loading-message {
-    color: #aaa;
+  color: #aaa;
 }
 
 .error-message {
-    color: red;
+  color: red;
 }
 
 /* -------------------------------
    Input & Send Button
 -------------------------------- */
 .input-area {
-    display: flex;
-    padding: 10px 20px;
-    background-color: #333;
-    border-top: 1px solid #444;
+  display: flex;
+  padding: 10px 20px;
+  background-color: #333;
+  border-top: 1px solid #444;
 }
 
 .message-input {
-    flex: 1;
-    padding: 10px;
-    background-color: #555;
-    color: #fff;
-    border: 1px solid #444;
-    border-radius: 4px;
-    margin-right: 10px;
+  flex: 1;
+  padding: 10px;
+  background-color: #555;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+  margin-right: 10px;
 }
 
 .message-input::placeholder {
-    color: #bbb;
+  color: #bbb;
 }
 
 .send-btn {
-    background-color: #666;
-    border: none;
-    border-radius: 4px;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+  background-color: #666;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .send-btn:hover {
-    background-color: #777;
+  background-color: #777;
 }
 
 .send-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* -----------------------------------------------
@@ -195,29 +210,29 @@ h1 {
 
 .chat-window::-webkit-scrollbar,
 .message-container::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .chat-window::-webkit-scrollbar-track,
 .message-container::-webkit-scrollbar-track {
-    background: #2c2c2c;
-    border-radius: 10px;
+  background: #2c2c2c;
+  border-radius: 10px;
 }
 
 .chat-window::-webkit-scrollbar-thumb,
 .message-container::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 10px;
-    transition: background 0.3s ease;
+  background: #444;
+  border-radius: 10px;
+  transition: background 0.3s ease;
 }
 
 .chat-window::-webkit-scrollbar-thumb:hover,
 .message-container::-webkit-scrollbar-thumb:hover {
-    background: #666;
+  background: #666;
 }
 
 .chat-window,
 .message-container {
-    scrollbar-width: thin;
-    scrollbar-color: #444 #2c2c2c;
+  scrollbar-width: thin;
+  scrollbar-color: #444 #2c2c2c;
 }
