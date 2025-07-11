@@ -49,6 +49,6 @@ git clone https://github.com/Xhadrines/Alex-VirtualAssistant.git
 * prof. dr. ing. Turcu Cristina Elena - Profesor îndrumător
 
 ## Alte informații
-**Documentație:** [Apasă-mă](Documentatie.pdf)
+**Documentație:** [Apasă-mă](Documentatie-Alex-VirtualAssistant.pdf)
 
 **Demo:** [Apasă-mă](Demo.mp4)
